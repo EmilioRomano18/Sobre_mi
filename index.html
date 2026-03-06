@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Emilio Espinoza | Web Developer Portfolio</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Fira+Code:wght@400;500&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0a0c;
+      --card-bg: #16161a;
+      --accent: #3b82f6;
+      --accent-secondary: #2dd4bf;
+      --text-main: #f8fafc;
+      --text-dim: #94a3b8;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: "Inter", sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* --- Navegación --- */
+    nav {
+      display: flex;
+      justify-content: flex-end;
+      padding: 2rem 0;
+      gap: 2rem;
+      align-items: center;
+      position: absolute;
+      width: 100%;
+      top: 0;
+      left: 0;
+      padding-right: 2rem;
+      z-index: 100;
+    }
+
+    .nav-link {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-family: "Fira Code", monospace;
+      font-size: 0.9rem;
+      transition: var(--transition);
+    }
+
+    .nav-link:hover {
+      color: var(--accent);
+    }
+
+    .btn-contact-nav {
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      padding: 0.5rem 1.2rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-family: "Fira Code", monospace;
+      font-size: 0.85rem;
+      transition: var(--transition);
+    }
+
+    .btn-contact-nav:hover {
+      background: rgba(59, 130, 246, 0.1);
+      transform: translateY(-2px);
+    }
+
+    /* --- Header / Hero --- */
+    header {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 8vw, 4.5rem);
+      font-weight: 700;
+      letter-spacing: -2px;
+      margin-bottom: 1rem;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg,
+          var(--accent),
+          var(--accent-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    p.subtitle {
+      font-size: 1.25rem;
+      color: var(--text-dim);
+      max-width: 600px;
+      margin-bottom: 2.5rem;
+    }
+
+    .btns {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .btn-primary {
+      background-color: var(--accent);
+      color: white;
+      border: 1px solid var(--accent);
+    }
+
+    .btn-primary:hover {
+      background-color: transparent;
+      color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    .btn-secondary {
+      border: 1px solid #2d2d33;
+      color: var(--text-main);
+      background: transparent;
+    }
+
+    .btn-secondary:hover {
+      background: #1c1c21;
+      border-color: var(--text-dim);
+      transform: translateY(-3px);
+    }
+
+    /* --- Secciones --- */
+    section {
+      padding: 6rem 0;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 3rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .section-title::after {
+      content: "";
+      height: 1px;
+      flex-grow: 1;
+      background: var(--card-bg);
+    }
+
+    /* --- Habilidades --- */
+    .skills-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2.5rem;
+    }
+
+    .skill-category h4 {
+      color: var(--text-dim);
+      font-family: "Fira Code", monospace;
+      font-size: 0.85rem;
+      margin-bottom: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .skill-item {
+      background: var(--card-bg);
+      border: 1px solid #2d2d33;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      transition: var(--transition);
+      cursor: default;
+    }
+
+    .skill-item:hover {
+      border-color: var(--accent);
+      background: rgba(59, 130, 246, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .skill-item.learning {
+      border-style: dashed;
+      opacity: 0.7;
+    }
+
+    /* --- Proyectos --- */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+
+    .project-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .project-card {
+      background: var(--card-bg);
+      padding: 2.2rem;
+      border-radius: 12px;
+      border: 1px solid #2d2d33;
+      height: 100%;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+
+    .external-link-icon {
+      color: var(--accent);
+      font-size: 1.3rem;
+      transition: var(--transition);
+    }
+
+    .project-card h3 {
+      font-family: "Fira Code", monospace;
+      color: var(--accent);
+      font-size: 1.25rem;
+    }
+
+    .project-card p {
+      color: var(--text-dim);
+      font-size: 0.95rem;
+      flex-grow: 1;
+    }
+
+    .project-link:hover .project-card {
+      transform: translateY(-10px);
+      border-color: var(--accent);
+      background-color: #1c1c21;
+      box-shadow: 0 15px 35px rgba(59, 130, 246, 0.1);
+    }
+
+    .project-link:hover .external-link-icon {
+      transform: translate(3px, -3px);
+    }
+
+    .tags {
+      margin-top: 2rem;
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      font-family: "Fira Code", monospace;
+      background: #1e1e24;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      color: var(--accent-secondary);
+      border: 1px solid rgba(45, 212, 191, 0.2);
+    }
+
+    /* --- Footer --- */
+    footer {
+      padding: 5rem 0;
+      text-align: center;
+      border-top: 1px solid var(--card-bg);
+      color: var(--text-dim);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        justify-content: center;
+        padding-right: 0;
+      }
+
+      header {
+        align-items: center;
+        text-align: center;
+      }
+
+      .section-title::after {
+        display: none;
+      }
+
+      .btns {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <nav>
+      <a href="#proyectos" class="nav-link">/proyectos</a>
+      <a href="#habilidades" class="nav-link">/habilidades</a>
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=gilbert13458@gmail.com&su=Contacto+desde+Portafolio"
+        target="_blank" class="btn-contact-nav">Hablemos</a>
+    </nav>
+
+    <header>
+      <p style="
+            font-family: &quot;Fira Code&quot;, monospace;
+            color: var(--accent-secondary);
+            margin-bottom: 1rem;
+          ">
+        [ Estudiante de desarrollo web ]
+      </p>
+      <h1>Hola, soy <span class="gradient-text">Emilio Espinoza</span></h1>
+      <p class="subtitle">
+        Desarrollador Web enfocado en crear interfaces limpias y experiencias
+        digitales eficientes. Construyo proyectos para aprender y resolver
+        retos del mundo real.
+      </p>
+      <div class="btns">
+        <a href="#proyectos" class="btn btn-primary">Ver Proyectos</a>
+        <a href="mailto:gilbert13458@gmail.com" class="btn btn-secondary">Contacto</a>
+      </div>
+    </header>
+
+    <section id="habilidades">
+      <h2 class="section-title">Habilidades Técnicas</h2>
+      <div class="skills-container">
+        <div class="skill-category">
+          <h4>Lenguajes & Estructura</h4>
+          <div class="skills-grid">
+            <span class="skill-item">HTML5</span>
+            <span class="skill-item">CSS3</span>
+            <span class="skill-item">JavaScript</span>
+            <span class="skill-item">Java</span>
+            <span class="skill-item">SQL</span>
+            <span class="skill-item">PHP</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h4>Frameworks & Tools</h4>
+          <div class="skills-grid">
+            <span class="skill-item">Tailwind CSS</span>
+            <span class="skill-item">Bootstrap</span>
+            <span class="skill-item">JQuery</span>
+            <span class="skill-item">Git / GitHub</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h4>En Aprendizaje</h4>
+          <div class="skills-grid">
+            <span class="skill-item learning">React.js</span>
+            <span class="skill-item learning">Node.js</span>
+            <span class="skill-item learning">UI Design</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="proyectos">
+      <h2 class="section-title">Proyectos Destacados</h2>
+      <div class="projects-grid">
+        <a href="https://emilioromano18.github.io/TV-Apple/" target="_blank" class="project-link">
+          <article class="project-card">
+            <div class="card-header">
+              <h3>01. Apple TV+ Clone</h3>
+              <span class="external-link-icon">↗</span>
+            </div>
+            <p>
+              Réplica de la interfaz de Apple TV+ con foco en la jerarquía
+              visual y manipulación dinámica del contenido mediante eventos de
+              usuario.
+            </p>
+            <div class="tags">
+              <span class="tag">Bootstrap</span>
+              <span class="tag">JQuery</span>
+              <span class="tag">Responsive</span>
+            </div>
+          </article>
+        </a>
+
+        <a href="https://emilioromano18.github.io/Pokemon-cards/" target="_blank" class="project-link">
+          <article class="project-card">
+            <div class="card-header">
+              <h3>02. PokéCard Retro Shop</h3>
+              <span class="external-link-icon">↗</span>
+            </div>
+            <p>
+              E-commerce experimental con estética retro. Implementa lógica de
+              selección de productos y actualización de estados en tiempo
+              real.
+            </p>
+            <div class="tags">
+              <span class="tag">Tailwind CSS</span>
+              <span class="tag">Vanilla JS</span>
+              <span class="tag">Pixel Art UI</span>
+            </div>
+          </article>
+        </a>
+
+        <a href="https://emilioromano18.github.io/Calculadora_gg/" target="_blank" class="project-link">
+          <article class="project-card">
+            <div class="card-header">
+              <h3>03. Calculadora Pro</h3>
+              <span class="external-link-icon">↗</span>
+            </div>
+            <p>
+              Calculadora funcional que gestiona operaciones matemáticas y
+              control de errores, optimizada con CSS Grid para un diseño
+              moderno.
+            </p>
+            <div class="tags">
+              <span class="tag">JS Logic</span>
+              <span class="tag">CSS Grid</span>
+              <span class="tag">Error Handling</span>
+            </div>
+          </article>
+        </a>
+      </div>
+    </section>
+
+    <footer>
+      <p>Construido por <strong>Emilio Espinoza</strong> &copy; 2025</p>
+      <p style="margin-top: 1rem; opacity: 0.5; font-size: 0.8rem">
+        HTML5 | CSS3 | GitHub Pages
+      </p>
+    </footer>
+  </div>
+</body>
+
+</html>
