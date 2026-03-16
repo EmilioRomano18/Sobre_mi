@@ -1,0 +1,565 @@
+/* --- Variables de Color --- */
+/* Sección que define variables CSS personalizadas para colores, permitiendo cambiar temas fácilmente */
+:root {
+  /* Tema Oscuro (Default) */
+  /* Variables para el tema oscuro, que es el predeterminado */
+  --bg: #0a0a0c;
+  --card-bg: #16161a;
+  --accent: #3b82f6;
+  --accent-secondary: #2dd4bf;
+  --text-main: #f8fafc;
+  --text-dim: #94a3b8;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --border-color: #2d2d33;
+}
+
+/* Tema Claro */
+/* Variables para el tema claro, aplicadas cuando el atributo data-theme="light" está presente en el elemento html */
+[data-theme="light"] {
+  --bg: #f1f5f9;
+  --card-bg: #ffffff;
+  --text-main: #0f172a;
+  --text-dim: #475569;
+  --accent: #2563eb;
+  --accent-secondary: #0d9488;
+  --border-color: #e2e8f0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/* Reset CSS: elimina márgenes y rellenos predeterminados de todos los elementos y establece box-sizing para incluir padding y border en el ancho/alto total */
+
+html {
+  scroll-behavior: smooth;
+}
+/* Hace que el desplazamiento suave esté habilitado para toda la página */
+
+body {
+  background-color: var(--bg);
+  color: var(--text-main);
+  font-family: "Inter", sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+/* Estilos para el body: fondo dinámico según tema, color de texto, fuente, altura de línea, oculta desbordamiento horizontal y transiciones suaves */
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+/* Contenedor principal: limita el ancho máximo, centra la página y añade padding lateral */
+
+/* --- Navegación --- */
+/* Estilos para la barra de navegación */
+nav {
+  display: flex;
+  justify-content: flex-end;
+  padding: 2rem 0;
+  gap: 1.5rem;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  padding-right: 2rem;
+  z-index: 100;
+}
+/* Navegación posicionada absolutamente en la parte superior derecha, con flexbox para alinear elementos */
+
+.nav-link {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-family: "Fira Code", monospace;
+  font-size: 0.9rem;
+  transition: var(--transition);
+}
+/* Estilos para los enlaces de navegación: color tenue, fuente monoespaciada, transiciones suaves */
+
+.nav-link:hover {
+  color: var(--accent);
+}
+/* Efecto hover: cambia el color al color acento */
+
+/* Botón de Cambio de Tema */
+/* Estilos para el botón que alterna entre tema oscuro y claro */
+.theme-toggle {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+/* Botón con fondo de tarjeta, borde, cursor pointer, padding y transiciones */
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+/* Efecto hover: cambia color del borde y eleva ligeramente el botón */
+
+.sun-icon {
+  display: none;
+  font-size: 1.2rem;
+}
+/* Icono del sol oculto por defecto */
+
+.moon-icon {
+  display: block;
+  font-size: 1.2rem;
+}
+/* Icono de la luna visible por defecto */
+
+[data-theme="light"] .sun-icon {
+  display: block;
+}
+/* Muestra el icono del sol cuando el tema es claro */
+
+[data-theme="light"] .moon-icon {
+  display: none;
+}
+/* Oculta el icono de la luna cuando el tema es claro */
+
+.btn-contact-nav {
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  padding: 0.5rem 1.2rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-family: "Fira Code", monospace;
+  font-size: 0.85rem;
+  transition: var(--transition);
+}
+/* Botón de contacto en la navegación: borde acento, color acento, fuente monoespaciada */
+
+.btn-contact-nav:hover {
+  background: rgba(59, 130, 246, 0.1);
+  transform: translateY(-2px);
+}
+/* Efecto hover: fondo semi-transparente y elevación */
+
+/* --- Header / Hero --- */
+/* Estilos para la sección principal de la página (hero) */
+header {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  align-items: center;
+  gap: 2rem;
+  padding-top: 4rem;
+}
+/* Header ocupa al menos toda la altura de la ventana, con grid de dos columnas para contenido y imagen */
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+/* Contenido del hero: flex column, centrado verticalmente, alineado a la izquierda */
+
+/* Foto con diseño Morphing */
+/* Estilos para la imagen de perfil con efecto de morphing (cambio de forma) */
+.hero-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* Contenedor de la imagen centrado */
+
+.photo-wrapper {
+  position: relative;
+  width: 300px;
+  height: 300px;
+}
+/* Wrapper de la foto: posición relativa, tamaño fijo */
+
+.photo-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border: 2px solid var(--accent);
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  animation: morph 8s linear infinite alternate;
+  z-index: -1;
+}
+/* Pseudo-elemento ::before: crea un borde animado alrededor de la imagen con forma morphing */
+
+.photo-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  animation: morph 8s linear infinite;
+  filter: grayscale(20%);
+  border: 4px solid var(--card-bg);
+  transition: var(--transition);
+}
+/* Imagen: cubre todo el contenedor, forma morphing, filtro gris, borde, transiciones */
+
+.photo-wrapper img:hover {
+  filter: grayscale(0%);
+  transform: scale(1.02);
+}
+/* Efecto hover: remueve filtro gris y escala ligeramente */
+
+@keyframes morph {
+  0% {
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  }
+
+  50% {
+    border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%;
+  }
+
+  100% {
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  }
+}
+/* Animación morph: cambia el border-radius para crear efecto de forma cambiante */
+
+h1 {
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  font-weight: 700;
+  letter-spacing: -2px;
+  margin-bottom: 1rem;
+}
+/* Título principal: tamaño responsivo con clamp, negrita, espaciado de letras negativo */
+
+.gradient-text {
+  background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+/* Texto con gradiente: aplica un gradiente lineal como color de texto usando propiedades webkit */
+
+p.subtitle {
+  font-size: 1.25rem;
+  color: var(--text-dim);
+  max-width: 600px;
+  margin-bottom: 2.5rem;
+}
+/* Subtítulo: tamaño mediano, color tenue, ancho máximo, margen inferior */
+
+/* Botones */
+/* Estilos para los botones en la sección hero */
+.btns {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+/* Contenedor de botones: flex con gap y wrap para responsividad */
+
+.btn {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: var(--transition);
+}
+/* Clase base para botones: inline-block, padding, borde redondeado, sin decoración, negrita, transiciones */
+
+.btn-primary {
+  background-color: var(--accent);
+  color: white;
+  border: 1px solid var(--accent);
+}
+/* Botón primario: fondo acento, texto blanco, borde acento */
+
+.btn-primary:hover {
+  background-color: transparent;
+  color: var(--accent);
+  transform: translateY(-3px);
+}
+/* Hover primario: fondo transparente, color acento, elevación */
+
+.btn-secondary {
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  background: transparent;
+}
+/* Botón secundario: borde tenue, color texto, fondo transparente */
+
+.btn-secondary:hover {
+  background: var(--card-bg);
+  transform: translateY(-3px);
+}
+/* Hover secundario: fondo de tarjeta, elevación */
+
+.btn-github {
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  background: var(--card-bg);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+/* Botón GitHub: similar a secundario pero con flex para icono */
+
+/* --- Secciones --- */
+/* Estilos para las secciones de contenido */
+section {
+  padding: 6rem 0;
+}
+/* Padding vertical para todas las secciones */
+
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 3rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+/* Título de sección: grande, margen inferior, flex con gap */
+
+.section-title::after {
+  content: "";
+  height: 1px;
+  flex-grow: 1;
+  background: var(--border-color);
+}
+/* Pseudo-elemento ::after: línea horizontal después del título */
+
+/* --- Habilidades --- */
+/* Estilos para la sección de habilidades */
+.skills-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2.5rem;
+}
+/* Contenedor de habilidades: grid responsivo con columnas mínimas de 250px */
+
+.skill-category h4 {
+  color: var(--text-dim);
+  font-family: "Fira Code", monospace;
+  font-size: 0.85rem;
+  margin-bottom: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+/* Título de categoría de habilidades: color tenue, fuente mono, mayúsculas, espaciado */
+
+.skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+/* Grid de habilidades: flex wrap con gap */
+
+.skill-item {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  transition: var(--transition);
+  cursor: default;
+}
+/* Item de habilidad: fondo tarjeta, borde, padding, borde redondeado, transiciones */
+
+/* --- Proyectos --- */
+/* Estilos para la sección de proyectos */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+}
+/* Grid de proyectos: columnas responsivas mínimas de 320px */
+
+.project-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+/* Enlace de proyecto: sin decoración, color heredado, display block */
+
+.project-card {
+  background: var(--card-bg);
+  padding: 2.2rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  height: 100%;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+}
+/* Tarjeta de proyecto: fondo, padding, borde redondeado, altura completa, flex column */
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+/* Header de tarjeta: flex space-between, margen inferior */
+
+.external-link-icon {
+  color: var(--accent);
+  font-size: 1.3rem;
+  transition: var(--transition);
+}
+/* Icono de enlace externo: color acento, tamaño grande, transiciones */
+
+.project-card h3 {
+  font-family: "Fira Code", monospace;
+  color: var(--accent);
+  font-size: 1.25rem;
+}
+/* Título de proyecto: fuente mono, color acento */
+
+.project-card p {
+  color: var(--text-dim);
+  font-size: 0.95rem;
+  flex-grow: 1;
+}
+/* Descripción de proyecto: color tenue, flex-grow para ocupar espacio */
+
+.project-link:hover .project-card {
+  transform: translateY(-10px);
+  border-color: var(--accent);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+/* Hover en enlace: eleva tarjeta, cambia borde, añade sombra */
+
+.tags {
+  margin-top: 2rem;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+/* Contenedor de tags: flex wrap con gap */
+
+.tag {
+  font-size: 0.75rem;
+  font-family: "Fira Code", monospace;
+  background: var(--bg);
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  color: var(--accent-secondary);
+  border: 1px solid var(--border-color);
+}
+/* Tag: pequeño, fuente mono, fondo bg, padding, borde */
+
+/* --- Footer --- */
+/* Estilos para el pie de página */
+footer {
+  padding: 5rem 0;
+  text-align: center;
+  border-top: 1px solid var(--border-color);
+  color: var(--text-dim);
+  font-size: 0.9rem;
+}
+/* Footer: padding, centrado, borde superior, color tenue */
+
+@media (max-width: 850px) {
+  header {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding-top: 8rem;
+  }
+
+  .hero-image {
+    order: -1;
+    margin-bottom: 2rem;
+  }
+
+  .hero-content {
+    align-items: center;
+  }
+
+  nav {
+    justify-content: center;
+    padding-right: 0;
+  }
+
+  .section-title::after {
+    display: none;
+  }
+
+  .btns {
+    justify-content: center;
+  }
+}
+/* Media query para pantallas pequeñas: cambia layout a columna, centra elementos, oculta línea de título */
+
+/* --- Animaciones de Scroll (Fade-in) --- */
+/* Estilos para animaciones de entrada cuando las secciones entran en el viewport */
+
+/* Estado inicial: elementos ocultos */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+/* Clase base para elementos que se animarán al hacer scroll */
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Estado visible: elementos completamente opacos y en posición original */
+
+/* Variaciones de animación con delays escalonados */
+.fade-in.delay-1 {
+  transition-delay: 0.1s;
+}
+.fade-in.delay-2 {
+  transition-delay: 0.2s;
+}
+.fade-in.delay-3 {
+  transition-delay: 0.3s;
+}
+.fade-in.delay-4 {
+  transition-delay: 0.4s;
+}
+.fade-in.delay-5 {
+  transition-delay: 0.5s;
+}
+/* Delays progresivos para crear efecto de cascada en elementos consecutivos */
+
+/* Animaciones específicas para diferentes tipos de elementos */
+.slide-in-left {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slide-in-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.slide-in-right {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slide-in-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.scale-in {
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scale-in.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+/* Variaciones adicionales: slide desde izquierda/derecha y scale para efectos más dinámicos */
