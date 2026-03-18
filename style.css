@@ -308,6 +308,30 @@ p.subtitle {
 }
 /* Botón GitHub: similar a secundario pero con flex para icono */
 
+.btn-whatsapp {
+  border: 1px solid #25d366;
+  color: #25d366;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  transition: var(--transition);
+}
+/* Botón WhatsApp: borde verde WhatsApp, color verde, fondo transparente */
+
+.btn-whatsapp:hover {
+  background: #25d366;
+  color: white;
+  transform: translateY(-3px);
+}
+/* Hover WhatsApp: fondo verde, texto blanco, elevación */
+
+.btn-whatsapp .whatsapp-icon {
+  font-size: 1.1rem;
+}
+/* Icono de WhatsApp: tamaño ligeramente mayor */
+
 /* --- Secciones --- */
 /* Estilos para las secciones de contenido */
 section {
