@@ -132,22 +132,26 @@ nav {
 /* Oculta el icono de la luna cuando el tema es claro */
 
 .btn-contact-nav {
-  border: 1px solid var(--accent);
-  color: var(--accent);
+  border: 1px solid #25d366;
+  color: #25d366;
   padding: 0.5rem 1.2rem;
   border-radius: 4px;
   text-decoration: none;
   font-family: "Fira Code", monospace;
   font-size: 0.85rem;
   transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
-/* Botón de contacto en la navegación: borde acento, color acento, fuente monoespaciada */
+/* Botón de contacto en la navegación: borde verde WhatsApp, color verde, fuente monoespaciada */
 
 .btn-contact-nav:hover {
-  background: rgba(59, 130, 246, 0.1);
+  background: #25d366;
+  color: white;
   transform: translateY(-2px);
 }
-/* Efecto hover: fondo semi-transparente y elevación */
+/* Efecto hover: fondo verde WhatsApp, texto blanco y elevación */
 
 /* --- Header / Hero --- */
 /* Estilos para la sección principal de la página (hero) */
