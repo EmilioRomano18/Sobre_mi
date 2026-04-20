@@ -53,6 +53,20 @@
           <i class="fab fa-whatsapp"></i> WhatsApp
         </a>
         <!-- Botón para contactar vía WhatsApp, abre en nueva pestaña -->
+
+        <!-- Sección de autenticación en la navegación -->
+        <!-- Si NO está logueado: muestra botón "Iniciar Sesión" -->
+        <a href="auth.html" class="btn-login-nav" id="btn-login-nav">
+          <i class="fas fa-user"></i> Login
+        </a>
+
+        <!-- Si SÍ está logueado: muestra nombre del usuario + botón logout -->
+        <div class="nav-user-section" id="nav-user-section" style="display: none">
+          <span class="nav-user-name" id="nav-user-name"></span>
+          <button class="btn-logout-nav" id="btn-logout-nav">
+            <i class="fas fa-sign-out-alt"></i> Salir
+          </button>
+        </div>
       </nav>
 
       <header>
@@ -262,5 +276,37 @@
 
     <script src="script.js"></script>
     <!-- Enlace al archivo JavaScript externo para la funcionalidad del tema -->
+
+    <!-- Script de Firebase para gestionar el estado de autenticación en el portfolio -->
+    <script type="module">
+      import { onAuthChange, logoutUser } from "./firebase-auth.js";
+
+      // Elementos del DOM para la sección de autenticación
+      const btnLoginNav = document.getElementById("btn-login-nav");
+      const navUserSection = document.getElementById("nav-user-section");
+      const navUserName = document.getElementById("nav-user-name");
+      const btnLogoutNav = document.getElementById("btn-logout-nav");
+
+      // Escuchar cambios de autenticación
+      // Se ejecuta automáticamente cuando el usuario inicia o cierra sesión
+      onAuthChange((user) => {
+        if (user) {
+          // Usuario logueado → mostrar nombre y botón logout
+          btnLoginNav.style.display = "none";
+          navUserSection.style.display = "flex";
+          navUserName.textContent = user.displayName || user.email;
+        } else {
+          // Sin sesión → mostrar botón login
+          btnLoginNav.style.display = "flex";
+          navUserSection.style.display = "none";
+        }
+      });
+
+      // Botón de logout
+      btnLogoutNav.addEventListener("click", async () => {
+        await logoutUser();
+        // La interfaz se actualiza automáticamente por onAuthChange
+      });
+    </script>
   </body>
 </html>
